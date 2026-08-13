@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bhavesh Pal — Marketing Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEE9DD;
+    --paper-2:#E3DDCC;
+    --ink:#1C2541;
+    --ink-70:rgba(28,37,65,.72);
+    --ink-45:rgba(28,37,65,.45);
+    --teal:#2F6F5E;
+    --brick:#A6443A;
+    --line:#C6BEA5;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:16px;
+    line-height:1.55;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.72rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--teal);
+    display:flex;
+    align-items:center;
+    gap:.5em;
+  }
+  .eyebrow::before{
+    content:"";
+    width:16px;height:1px;background:var(--teal);display:inline-block;
+  }
+  a{color:inherit;}
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+  /* NAV */
+  header.nav{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(238,233,221,.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1080px;
+    margin:0 auto;
+    padding:16px 28px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .nav-mark{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.85rem;
+    font-weight:500;
+    letter-spacing:.02em;
+  }
+  .nav-links{
+    display:flex;
+    gap:28px;
+    list-style:none;
+    margin:0;padding:0;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.78rem;
+    letter-spacing:.04em;
+  }
+  .nav-links a{
+    text-decoration:none;
+    color:var(--ink-70);
+    padding-bottom:2px;
+    border-bottom:1px solid transparent;
+    transition:color .2s, border-color .2s;
+  }
+  .nav-links a:hover, .nav-links a:focus-visible{
+    color:var(--ink);
+    border-color:var(--brick);
+  }
+  @media (max-width:640px){ .nav-links{display:none;} }
+
+  /* HERO */
+  .hero{
+    padding:88px 0 56px;
+    border-bottom:1px solid var(--line);
+  }
+  .hero h1{
+    font-size:clamp(2.6rem, 7vw, 4.6rem);
+    line-height:.98;
+    margin-top:14px;
+  }
+  .hero .role{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:1rem;
+    color:var(--teal);
+    margin-top:14px;
+    letter-spacing:.01em;
+  }
+  .hero p.bio{
+    max-width:560px;
+    margin-top:22px;
+    color:var(--ink-70);
+    font-size:1.02rem;
+  }
+  .cta-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:30px;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:12px 20px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.8rem;
+    letter-spacing:.03em;
+    text-decoration:none;
+    border-radius:var(--radius);
+    border:1px solid var(--ink);
+    transition:background .2s, color .2s, transform .15s;
+  }
+  .btn-solid{background:var(--ink); color:var(--paper);}
+  .btn-solid:hover{background:var(--teal); border-color:var(--teal); transform:translateY(-1px);}
+  .btn-outline{background:transparent; color:var(--ink);}
+  .btn-outline:hover{background:var(--ink); color:var(--paper); transform:translateY(-1px);}
+
+  /* TICKER — signature element */
+  .ticker-band{
+    background:var(--ink);
+    color:var(--paper);
+    overflow:hidden;
+    border-bottom:1px solid var(--line);
+  }
+  .ticker-track{
+    display:flex;
+    width:max-content;
+    animation:scroll-left 42s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .ticker-track{animation:none;}
+    .ticker-band{overflow-x:auto;}
+  }
+  .ticker-track span.item{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.85rem;
+    white-space:nowrap;
+    padding:14px 30px;
+    display:flex;
+    align-items:center;
+  }
+  .ticker-track span.item b{color:#D9C97A; font-weight:500;}
+  .ticker-track span.item::after{
+    content:"//";
+    margin-left:30px;
+    color:var(--ink-45);
+    color:rgba(238,233,221,.35);
+  }
+  @keyframes scroll-left{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
+
+  section{padding:72px 0;}
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:20px;
+    margin-bottom:40px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:20px;
+  }
+  .section-head h2{font-size:clamp(1.8rem,4vw,2.4rem);}
+  .section-head .count{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.78rem;
+    color:var(--ink-45);
+  }
+
+  /* PROJECTS */
+  .projects-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  @media (max-width:760px){ .projects-grid{grid-template-columns:1fr;} }
+  .project-card{
+    background:var(--paper);
+    padding:32px;
+    opacity:0;
+    transform:translateY(14px);
+    transition:opacity .6s ease, transform .6s ease;
+  }
+  .project-card.in-view{opacity:1; transform:none;}
+  .project-card .n{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.72rem;
+    color:var(--brick);
+    letter-spacing:.06em;
+  }
+  .project-card h3{
+    font-size:1.28rem;
+    margin-top:10px;
+    line-height:1.15;
+  }
+  .project-card .vs{color:var(--ink-45); font-weight:400;}
+  .project-card ul{
+    margin:18px 0 0;
+    padding:0;
+    list-style:none;
+  }
+  .project-card li{
+    position:relative;
+    padding-left:16px;
+    margin-bottom:9px;
+    font-size:.92rem;
+    color:var(--ink-70);
+  }
+  .project-card li::before{
+    content:"—";
+    position:absolute; left:0; top:0;
+    color:var(--teal);
+  }
+  .tags{margin-top:18px; display:flex; flex-wrap:wrap; gap:6px;}
+  .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.68rem;
+    padding:4px 8px;
+    border:1px solid var(--line);
+    color:var(--ink-70);
+    letter-spacing:.02em;
+  }
+
+  /* SKILLS */
+  .skills-cols{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+  }
+  @media (max-width:640px){ .skills-cols{grid-template-columns:1fr;} }
+  .skill-group h3{
+    font-size:.78rem;
+    font-family:'IBM Plex Mono', monospace;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    color:var(--ink-45);
+    font-weight:500;
+    margin-bottom:18px;
+  }
+  .chip-row{display:flex; flex-wrap:wrap; gap:10px;}
+  .chip{
+    padding:9px 14px;
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    font-size:.85rem;
+    border-radius:var(--radius);
+  }
+
+  /* APPLIED LEARNING */
+  .learn-list{border-top:1px solid var(--line);}
+  .learn-row{
+    display:grid;
+    grid-template-columns:160px 1fr 90px;
+    gap:20px;
+    padding:22px 0;
+    border-bottom:1px solid var(--line);
+    align-items:start;
+  }
+  @media (max-width:640px){
+    .learn-row{grid-template-columns:1fr; gap:6px;}
+  }
+  .learn-row .org{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.05rem;
+  }
+  .learn-row .desc{color:var(--ink-70); font-size:.92rem;}
+  .learn-row .yr{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.78rem;
+    color:var(--ink-45);
+    text-align:right;
+  }
+  @media (max-width:640px){ .learn-row .yr{text-align:left;} }
+
+  /* EDUCATION */
+  .edu-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  @media (max-width:760px){ .edu-grid{grid-template-columns:1fr;} }
+  .edu-card{background:var(--paper); padding:26px;}
+  .edu-card .deg{font-family:'Fraunces',serif; font-weight:600; font-size:1.1rem;}
+  .edu-card .inst{color:var(--ink-70); font-size:.88rem; margin-top:6px;}
+  .edu-card .score{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.8rem;
+    color:var(--teal);
+    margin-top:12px;
+  }
+
+  /* CONTACT / FOOTER */
+  footer{
+    background:var(--ink);
+    color:var(--paper);
+    padding:80px 0 40px;
+  }
+  footer h2{
+    font-size:clamp(2rem,6vw,3.2rem);
+    color:var(--paper);
+  }
+  footer .sub{color:rgba(238,233,221,.65); margin-top:14px; max-width:480px;}
+  .contact-grid{
+    margin-top:44px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:24px;
+    border-top:1px solid rgba(238,233,221,.2);
+    padding-top:28px;
+  }
+  @media (max-width:760px){ .contact-grid{grid-template-columns:1fr 1fr;} }
+  .contact-item .label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.68rem;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:rgba(238,233,221,.5);
+  }
+  .contact-item a, .contact-item span{
+    display:block;
+    margin-top:8px;
+    font-size:.95rem;
+    text-decoration:none;
+    color:var(--paper);
+  }
+  .contact-item a:hover{color:#D9C97A;}
+  .foot-bottom{
+    margin-top:56px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.72rem;
+    color:rgba(238,233,221,.4);
+  }
+  :focus-visible{outline:2px solid var(--brick); outline-offset:2px;}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="nav-mark">B. PAL — PORTFOLIO</div>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#background">Background</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Bhayandar, Maharashtra</div>
+    <h1>Bhavesh Pal</h1>
+    <div class="role">Marketing Analyst — Research &amp; Consumer Insights</div>
+    <p class="bio">I turn surveys and market data into recommendations businesses can act on — across banking, investment, and consumer behaviour. BMS graduate in Marketing (GPA 8.36) from Reena Mehta College, Mumbai University.</p>
+    <div class="cta-row">
+      <a class="btn btn-solid" href="mailto:bhaveshpal4work@gmail.com">Email Me</a>
+      <a class="btn btn-outline" href="https://linkedin.com/in/bhaveshh11" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="btn btn-outline" href="Bhavesh_Pal_Resume.pdf" target="_blank" rel="noopener">Download Resume ↓</a>
+    </div>
+  </div>
+</section>
+
+<div class="ticker-band" aria-label="Research highlights">
+  <div class="ticker-track" id="tickerTrack"></div>
+</div>
+
+<section id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Research Projects</h2>
+      <div class="count">4 studies · 330 respondents</div>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="n">N=100 · SURVEY + HYPOTHESIS TESTING</div>
+        <h3>Digital Banking Strategy<br><span class="vs">HDFC Bank vs. ICICI Bank</span></h3>
+        <ul>
+          <li>Surveyed 100 customers and applied hypothesis testing to link digital marketing with feature adoption</li>
+          <li>70% discovered features via social media/YouTube; 67% were driven by promotional offers (80% at HDFC)</li>
+          <li>Benchmarked UX and trust metrics across both banks into bank-specific recommendations</li>
+        </ul>
+        <div class="tags"><span class="tag">Banking research</span><span class="tag">Hypothesis testing</span></div>
+      </div>
+
+      <div class="project-card">
+        <div class="n">N=60 · RETAIL INVESTORS, MMR</div>
+        <h3>Investment Behaviour<br><span class="vs">Gold ETFs vs. Physical Gold / SGBs</span></h3>
+        <ul>
+          <li>Assessed Gold ETF awareness, investment drivers, and preference among 60 retail investors</li>
+          <li>Only 13% were fully aware of Gold ETFs; liquidity (50%) and volatility (47%) drove decisions</li>
+          <li>Cross-referenced AMFI/Moneycontrol data (AUM ₹1.28L → ₹1.84L Cr) into 10 adoption recommendations</li>
+        </ul>
+        <div class="tags"><span class="tag">Investment research</span><span class="tag">Secondary data</span></div>
+      </div>
+
+      <div class="project-card">
+        <div class="n">N=100 · PREMIUM RETAIL HUBS, MUMBAI</div>
+        <h3>Sensory Branding<br><span class="vs">Apple vs. Starbucks</span></h3>
+        <ul>
+          <li>Studied visual, auditory, olfactory, and haptic branding cues across 100 respondents</li>
+          <li>94% instantly recognized the Apple logo; 85% felt stronger intent to buy after handling an iPhone</li>
+          <li>69% of Starbucks buyers entered stores purely by aroma — recommended scent/sound branding strategies</li>
+        </ul>
+        <div class="tags"><span class="tag">Consumer behaviour</span><span class="tag">Brand analysis</span></div>
+      </div>
+
+      <div class="project-card">
+        <div class="n">N=70 · SOCIAL MEDIA USERS, MUMBAI</div>
+        <h3>Social Media &amp; Purchasing<br><span class="vs">13-Parameter Behaviour Study</span></h3>
+        <ul>
+          <li>Surveyed 70 users across 13 purchase-related parameters on ad engagement and buying behaviour</li>
+          <li>86% purchased a product after seeing it on social media; 60% of spend fell in the ₹500–2,000 range</li>
+          <li>Delivered 7 brand recommendations, including Instagram/YouTube optimization and mid-range pricing</li>
+        </ul>
+        <div class="tags"><span class="tag">Consumer insights</span><span class="tag">Survey design</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Toolkit</h2>
+      <div class="count">Research + technical</div>
+    </div>
+    <div class="skills-cols">
+      <div class="skill-group">
+        <h3>Research &amp; Analysis</h3>
+        <div class="chip-row">
+          <span class="chip">Market Research</span>
+          <span class="chip">Banking Research</span>
+          <span class="chip">Investment Research</span>
+          <span class="chip">Consumer Behaviour Analysis</span>
+          <span class="chip">Customer Insights</span>
+          <span class="chip">Quantitative Analysis</span>
+          <span class="chip">Comparative Analysis</span>
+          <span class="chip">Survey &amp; Questionnaire Design</span>
+          <span class="chip">Data Interpretation</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Technical</h3>
+        <div class="chip-row">
+          <span class="chip">Microsoft Excel</span>
+          <span class="chip">Power BI (basics)</span>
+          <span class="chip">PowerPoint</span>
+          <span class="chip">Word</span>
+          <span class="chip">Google Forms</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="background">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Applied Learning</h2>
+      <div class="count">Job simulations &amp; certification, 2026</div>
+    </div>
+    <div class="learn-list">
+      <div class="learn-row">
+        <div class="org">Citi</div>
+        <div class="desc">Finance job simulation — analyzed 2022 KPI performance, audited Basel III RWA/CAR compliance, and modeled Omicron impact on credit card sales.</div>
+        <div class="yr">Forage, 2026</div>
+      </div>
+      <div class="learn-row">
+        <div class="org">Goldman Sachs</div>
+        <div class="desc">Controllers job simulation — built a budget and calculated fund NAV for valuation.</div>
+        <div class="yr">Forage, 2026</div>
+      </div>
+      <div class="learn-row">
+        <div class="org">Red Bull</div>
+        <div class="desc">Sales &amp; Marketing job simulation — analyzed account-level CAGR and handled client objections.</div>
+        <div class="yr">Forage, 2026</div>
+      </div>
+      <div class="learn-row">
+        <div class="org">Siemens Mobility</div>
+        <div class="desc">Job simulation — built KPIs and a dashboard for a simulated urban rail expansion.</div>
+        <div class="yr">Forage, 2026</div>
+      </div>
+      <div class="learn-row">
+        <div class="org">Power BI</div>
+        <div class="desc">Core dashboard-building fundamentals, certified via UniAthena &amp; Cambridge International Qualifications.</div>
+        <div class="yr">2026</div>
+      </div>
+    </div>
+
+    <div class="section-head" style="margin-top:64px;">
+      <h2>Education</h2>
+      <div class="count">3 credentials</div>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="deg">BMS, Marketing</div>
+        <div class="inst">Reena Mehta College, Mumbai University</div>
+        <div class="score">GPA 8.36 · May 2026</div>
+      </div>
+      <div class="edu-card">
+        <div class="deg">HSC, Commerce</div>
+        <div class="inst">KPB Hinduja College</div>
+        <div class="score">62.83% · May 2023</div>
+      </div>
+      <div class="edu-card">
+        <div class="deg">SSC</div>
+        <div class="inst">Rahul English High School</div>
+        <div class="score">78.80% · July 2021</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="eyebrow" style="color:#D9C97A;">Get in touch</div>
+    <h2>Let's talk research,<br>insights, or your next role.</h2>
+    <p class="sub">Open to entry-level analyst and client-facing research roles where survey rigor and clear communication drive real decisions.</p>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <div class="label">Email</div>
+        <a href="mailto:bhaveshpal4work@gmail.com">bhaveshpal4work@gmail.com</a>
+      </div>
+      <div class="contact-item">
+        <div class="label">Phone</div>
+        <a href="tel:+919004521034">+91 90045 21034</a>
+      </div>
+      <div class="contact-item">
+        <div class="label">LinkedIn</div>
+        <a href="https://linkedin.com/in/bhaveshh11" target="_blank" rel="noopener">/in/bhaveshh11</a>
+      </div>
+      <div class="contact-item">
+        <div class="label">Location</div>
+        <span>Bhayandar, Maharashtra</span>
+      </div>
+    </div>
+    <div class="foot-bottom">© 2026 Bhavesh Pal — Built for review, not decoration.</div>
+  </div>
+</footer>
+
+<script>
+  // Signature ticker content, duplicated for seamless loop
+  const stats = [
+    'N=330 respondents surveyed across 4 studies',
+    '<b>94%</b> instant Apple logo recognition',
+    '<b>86%</b> purchased after seeing a product on social media',
+    '<b>70%</b> discovered banking features via social media',
+    'Gold ETF AUM tracked ₹1.28L → ₹1.84L Cr',
+    '<b>69%</b> of Starbucks buyers drawn in purely by aroma',
+    '13 job-simulation deliverables completed, 2026'
+  ];
+  const track = document.getElementById('tickerTrack');
+  const build = () => stats.map(s => `<span class="item">${s}</span>`).join('');
+  track.innerHTML = build() + build();
+
+  // Reveal project cards on scroll
+  const cards = document.querySelectorAll('.project-card');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view'); });
+    }, { threshold: 0.15 });
+    cards.forEach(c => io.observe(c));
+  } else {
+    cards.forEach(c => c.classList.add('in-view'));
+  }
+</script>
+
+</body>
+</html>
